@@ -1,0 +1,25 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: update
+      run: sudo apt-get update
+    - name: install1
+      run: sudo bash ./script/build-gcc.sh
+    - name: export gcc
+      run: export PATH=/opt/gcc-arm-linux-gnueabihf-8.3.0/bin:$PATH
+    - name: build tslib
+      run: sudo bash ./script/build-tslib.sh
+    - name: build tslib
+      run: sudo bash ./scriptbuild-alsa.sh
